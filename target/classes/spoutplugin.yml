@@ -1,0 +1,6 @@
+name: Craftconomy
+version: 0.0.1
+description: Economy manager for the Spout server
+author: Greatman
+main: org.greatmancode.craftconomy.CraftconomyPlugin
+platform: BOTH

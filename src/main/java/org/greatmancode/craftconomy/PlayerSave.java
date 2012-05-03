@@ -19,6 +19,7 @@ public class PlayerSave implements Runnable {
 			PlayerAccount account = entry.getValue();
 			if (account.isSave())
 			{
+				System.out.println("Saving " + account.getPlayerName());
 				PlayerLoader.playerSave(account);
 				account.setSave(false);
 			}

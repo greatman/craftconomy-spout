@@ -15,6 +15,7 @@ public class PlayerAccount {
 	public double setBalance(double amount)
 	{
 		this.balance = amount;
+		setSave(true);
 		return this.balance;
 	}
 	/**

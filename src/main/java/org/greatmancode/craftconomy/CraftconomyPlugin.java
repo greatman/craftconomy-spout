@@ -22,7 +22,10 @@ public class CraftconomyPlugin extends CommonPlugin {
 	@Override
 	public void onDisable() {
 		// TODO Auto-generated method stub
-
+		new PlayerSave().run();
+		accountList.clear();
+		accountList = null;
+		config = null;
 	}
 
 	@Override
@@ -55,14 +58,7 @@ public class CraftconomyPlugin extends CommonPlugin {
 		loadAccounts();
 		CCLogger.info("Accounts loaded");
 		
-		CCLogger.info("Starting the save methodsdadasdad");
-		//this.getGame().getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
-		//	
-		//	public void run()
-		//	{
-		//		System.out.println("hello");
-		//	}
-		//}, 0L, 100L);
+		CCLogger.info("Starting the save method");
 		this.getGame().getScheduler().scheduleSyncRepeatingTask(this, new PlayerSave(), CraftconomyConfiguration.SAVE_INTERVAL.getLong(), CraftconomyConfiguration.SAVE_INTERVAL.getLong());
 		CCLogger.info("Save method loaded!");
 		
@@ -82,10 +78,15 @@ public class CraftconomyPlugin extends CommonPlugin {
 	}
 	
 	public void loadAccounts() {
-		CCLogger.info(PlayerLoader.dataFolder + "");
+
 		for (File file : PlayerLoader.dataFolder.listFiles()) {
             String name = file.getName().substring(0, file.getName().lastIndexOf("."));
-            accountList.put(name, PlayerLoader.accountLoader(name));
+            PlayerAccount account = PlayerLoader.accountLoader(name);
+            if (account != null)
+            {
+            	accountList.put(name, account);
+            }
+            
 		}    
 	}
 	
